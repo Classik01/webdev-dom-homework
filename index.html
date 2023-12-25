@@ -153,6 +153,7 @@ ${selectedComment.author} , `;
                     .catch((error) => {
                         document.getElementById("addingCommentMessage").style.display = "none";
                         document.querySelector(".add-form").style.display = "flex";
+                        
                         if (error === 400) {
                             alert("Имя и комментарий должны быть не короче 3 символов");
                         } else if (error === 500) {

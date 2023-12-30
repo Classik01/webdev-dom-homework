@@ -35,8 +35,7 @@ export function renderComments({commentsData}) {
         commentFooter.appendChild(likes);
         commentItem.appendChild(commentHeader);
         commentItem.appendChild(commentBody);
-        commentItem.appendChild(commentFooter);
-
+        commentItem.appendChild(commentFooter);р
         commentList.appendChild(commentItem);
     });
 }

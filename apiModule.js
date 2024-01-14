@@ -1,10 +1,24 @@
 import { renderComments } from './commentModule.js';
 
-const loadingMessage = document.getElementById("loadingMessage");
+const todosURL = "https://wedev-api.sky.pro/api/v2/aidar-sultanov/comments"
+const userURL = "https://wedev-api.sky.pro/api/user/login";
+
+export let token;
+export const setToken = (newToken) => {
+    token = newToken;
+};
+
+export let userName;
+export const setUserName = (newUserName) => {
+    userName = newUserName;
+};
 
 export const fetchComments = ({ commentsData }) => {
-    return fetch("https://wedev-api.sky.pro/api/v1/aidar-sultanov/comments", {
+    return fetch(todosURL, {
         method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
     })
         .then((response) => {
             return response;
@@ -23,14 +37,17 @@ export const fetchComments = ({ commentsData }) => {
                 };
             });
             commentsData = getApiComments;
-            loadingMessage.innerText = "";
             renderComments({ commentsData });
+            document.getElementById("loadingMessage").style.display = "none";
         })
 };
 
 export const postComment = ({ newComment, commentsData }) => {
-    fetch("https://wedev-api.sky.pro/api/v1/aidar-sultanov/comments", {
+    fetch(todosURL, {
         method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({
             name: newComment.name,
             text: newComment.text,
@@ -45,8 +62,11 @@ export const postComment = ({ newComment, commentsData }) => {
             }
         })
         .then((responseData) => {
-            return fetch("https://wedev-api.sky.pro/api/v1/aidar-sultanov/comments", {
+            return fetch(todosURL, {
                 method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             })
         })
         .then((response) => {
@@ -68,7 +88,6 @@ export const postComment = ({ newComment, commentsData }) => {
         .then(() => {
             document.getElementById("addingCommentMessage").style.display = "none";
             document.querySelector(".add-form").style.display = "flex";
-            nameInput.value = "";
             commentInput.value = "";
         })
         .catch((error) => {
@@ -85,3 +104,19 @@ export const postComment = ({ newComment, commentsData }) => {
             console.warn(error);
         });
 };
+
+export function login({ login, password }) {
+    const buttonElement = document.getElementById("loginButton");
+    return fetch(userURL, {
+        method: "POST",
+        body: JSON.stringify({
+            login,
+            password,
+        }),
+    }).then((response) => {
+        if (response.status === 400) {
+            alert("Неправильный логин или пароль")
+        }
+        return response.json();
+    });
+}

@@ -5,39 +5,10 @@
     <title>Проект "Комменты"</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="styles.css" />
-    <style>
-        .comment-text {
-            white-space: pre-line;
-        }
-
-        #loadingMessage,
-        #addingCommentMessage {
-            background: #202020;
-            padding: 10px;
-            margin-bottom: 10px;
-            text-align: center;
-            font-family: Helvetica;
-            font-size: 24px;
-            color: #ffffff;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="container">
-        <div id="loadingMessage">Пожалуйста, подождите, комментарии загружаются...</div>
-        <ul class="comments" id="commentList">
-        </ul>
-        <div id="addingCommentMessage" style="display: none;">Комментарий добавляется...</div>
-        <div class="add-form">
-            <input type="text" class="add-form-name" id="nameInput" placeholder="Введите ваше имя" />
-            <textarea type="textarea" class="add-form-text" id="commentInput" placeholder="Введите ваш комментарий"
-                rows="4"></textarea>
-            <div class="add-form-row">
-                <button class="add-form-button" id="submitButton">Написать</button>
-            </div>
-        </div>
-    </div>
+    <div id="app"></div>
     <script type="module" src="/main.js"></script>
 </body>
 </html>

@@ -62,6 +62,7 @@ export function renderComments({ commentsData }) {
     });
 
     displayComments(commentsData);
+    
     return;
   }
   const appHTML = `

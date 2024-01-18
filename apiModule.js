@@ -1,4 +1,6 @@
 import { renderComments } from './commentModule.js';
+import { format } from "date-fns";
+
 
 const todosURL = "https://wedev-api.sky.pro/api/v2/aidar-sultanov/comments"
 const userURL = "https://wedev-api.sky.pro/api/user/login";
@@ -28,9 +30,13 @@ export const fetchComments = ({ commentsData }) => {
         })
         .then((responseData) => {
             const getApiComments = responseData.comments.map((comment) => {
+                const newDate = format(
+                    new Date(comment.date),
+                    'yyyy-MM-dd hh.mm.ss',
+                  );
                 return {
                     author: comment.author.name,
-                    date: new Date(comment.date),
+                    date: newDate,
                     likes: comment.likes,
                     isLiked: false,
                     text: comment.text,
@@ -74,9 +80,13 @@ export const postComment = ({ newComment, commentsData }) => {
         })
         .then((responseData) => {
             const getApiComments = responseData.comments.map((comment) => {
+                const newDate = format(
+                    new Date(comment.date),
+                    'yyyy-MM-dd hh.mm.ss',
+                );
                 return {
                     author: comment.author.name,
-                    date: new Date(comment.date),
+                    date: newDate,
                     likes: comment.likes,
                     isLiked: false,
                     text: comment.text,

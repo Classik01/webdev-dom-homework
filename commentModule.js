@@ -1,7 +1,6 @@
 import { postComment, userName, fetchComments } from './apiModule.js';
 import { renderLogin } from './loginModule.js';
 
-
 function displayComments(commentsData) {
   const commentList = document.getElementById("commentList");
   commentsData.forEach((comment, index) => {
